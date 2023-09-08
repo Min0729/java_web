@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+	
+	function send(){
+		
+		$.ajax({
+			
+			type:"get",
+			dataType:"json",
+			url:"/practice0907/pracFood",
+			success: function(data){
+				
+				console.log(data);
+				
+				for(let i=0; i<data.length; i++){
+					let item = data[i];
+					
+					let str = `음식이름: ${item.name} <br> 음식가격:${item.price}<br>`;
+					$("#result").append(str);
+				}
+				
+				
+			},
+			
+			error: function(err){
+				alert("요청에 실패했습니다");
+			}
+
+		});
+		
+	}
+	
+</script>
+
+</head>
+<body>
+	
+	<button onclick="send()">음식정보보기</button>
+	<div  id = "result"></div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.wrap{
+		width: 1000px;
+		height: 900px;
+		margin:0 auto;
+	}
+	table{
+		width: 900px;
+		height: 800px;
+		border-radius: 10px;
+		text-align: center;
+	}
+	
+	td{
+		border: 1px solid skyblue;
+	}
+	tr:nth-child(1){
+		background-color: skyblue;
+	}
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+	
+	function send(){
+		
+		$.ajax({
+			
+			type:"get",
+			dataType:"json",
+			url: "/practice0907/ticketAll",
+			success: function(data){
+				
+				let str = `	<tr>
+									<td>티켓번호</td>
+									<td>티켓종류</td>
+									<td>티켓이용시간 종류</td>
+									<td>티켓이용시간</td>
+									<td>나이</td>
+									<td>가격</td>
+								</tr>`;
+								
+				
+				for(let i=0; i<data.length; i++){
+						
+					let item = data[i];
+					str += `<tr>
+									<td>${item.id}</td>
+									<td>${item.type}</td>
+									<td>${item.time_type}</td>
+									<td>${item.available_time}</td>
+									<td>${item.age}</td>
+									<td>${item.price}</td>
+								</tr>`
+								;
+					
+				}
+					$("#result").append(str);
+				
+				
+			},
+			
+			error: function(err){
+				alert("요청에 실패했습니다");
+			}	
+			
+		});
+		
+		
+	}
+	
+	
+</script>
+</head>
+<body>
+
+	<div class="wrap">
+		<button onclick="send()">티켓정보보기</button>
+		<table id="result"></table>
+	</div>
+</body>
+</html>
