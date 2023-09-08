@@ -39,7 +39,7 @@ try{
 	st.setString(3,usertel);
 	st.setString(4,userage);
 	
-	rs = st.executeQuery( ) ; 
+	st.executeUpdate() ; 
  
 if( rs.next() ) {
 	out.print(rs.getString(1));  
